@@ -48,5 +48,5 @@ jobs:
           else
             git commit -m "Config snapshot: $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
             git push
-            echo "✓ Configuration changes committed"
+            echo " Configuration changes committed"
           fi
