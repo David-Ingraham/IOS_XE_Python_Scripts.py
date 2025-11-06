@@ -1,6 +1,6 @@
 # IOS XE Python Scripts
 
-A collection of Python scripts for Cisco IOS-XE network automation and management.
+
 
 Inspired by the [CiscoDevNet/python_code_samples_network](https://github.com/CiscoDevNet/python_code_samples_network) repository.
 
