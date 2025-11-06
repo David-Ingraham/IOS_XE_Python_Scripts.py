@@ -21,11 +21,7 @@ if __name__ == '__main__':
     port = os.getenv('SWITCH_PORT', '443')
     output_file = os.getenv('OUTPUT_FILE', 'active_config.json')
     
-    # Validate required vars
-    if not host or not username or not password:
-        print("Error: Required environment variables missing:", file=sys.stderr)
-        print("  SWITCH_HOST, SWITCH_USERNAME, SWITCH_PASSWORD", file=sys.stderr)
-        sys.exit(1)
+ 
     
     url = f"https://{host}:{port}/restconf/data/Cisco-IOS-XE-native:native"
     
