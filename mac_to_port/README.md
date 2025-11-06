@@ -61,13 +61,7 @@ The script will display:
 
 Example output:
 ```
-Connecting to devnetsandboxiosxec9k.cisco.com...
-Searching for MAC address: 0050.56bf.4580
-
-MAC Address Table Entry Found:
-----------------------------------------------------------------------
-   10     0050.56bf.4580    DYNAMIC     Gi1/0/1
-----------------------------------------------------------------------
+  1    0050.56bf.7731    STATIC      Vl1 
 ```
 
 ## Notes
