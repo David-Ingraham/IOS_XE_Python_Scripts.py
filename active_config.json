@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2025-11-07T08:16:53.250711Z",
+  "snapshot_time": "2025-11-07T12:22:33.678736Z",
   "device": "devnetsandboxiosxec9k.cisco.com",
   "config": {
     "Cisco-IOS-XE-native:native": {
@@ -138,6 +138,10 @@
           {
             "id": 20,
             "name": "SERVERS-VLAN"
+          },
+          {
+            "id": 40,
+            "name": "NONO"
           },
           {
             "id": 100,
@@ -328,20 +332,6 @@
                       ]
                     }
                   }
-                },
-                "Cisco-IOS-XE-switch:trunk": {
-                  "allowed": {
-                    "vlan-v2": {
-                      "vlan-choices": {
-                        "vlans": "10,20,100"
-                      }
-                    }
-                  },
-                  "native": {
-                    "vlan": {
-                      "vlan-id": 999
-                    }
-                  }
                 }
               }
             },
@@ -353,15 +343,7 @@
               },
               "Cisco-IOS-XE-switch:nonegotiate": [
                 null
-              ],
-              "Cisco-IOS-XE-switch:trunk": {
-                "native": {
-                  "vlan-config": {
-                    "vlan-id": 999
-                  },
-                  "vlan": 999
-                }
-              }
+              ]
             },
             "storm-control": {
               "broadcast": {
@@ -1346,6 +1328,36 @@
               "subject-name": "cn=IOS-Self-Signed-Certificate-176228621"
             }
           ]
+        }
+      },
+      "router": {
+        "Cisco-IOS-XE-ospf:router-ospf": {
+          "ospf": {
+            "process-id": [
+              {
+                "id": 1,
+                "auto-cost": {
+                  "reference-bandwidth": 1000
+                },
+                "network": [
+                  {
+                    "ip": "10.0.1.0",
+                    "wildcard": "0.0.0.255",
+                    "area": 0
+                  },
+                  {
+                    "ip": "10.0.2.0",
+                    "wildcard": "0.0.0.255",
+                    "area": 0
+                  }
+                ],
+                "passive-interface": {
+                  "default": true
+                },
+                "router-id": "1.1.1.1"
+              }
+            ]
+          }
         }
       },
       "line": {
