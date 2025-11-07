@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2025-11-07T00:55:57.256796Z",
+  "snapshot_time": "2025-11-07T04:14:57.880591Z",
   "device": "devnetsandboxiosxec9k.cisco.com",
   "config": {
     "Cisco-IOS-XE-native:native": {
@@ -118,6 +118,11 @@
           "mss": 1280,
           "window-size": 212000,
           "ack-tuning": {}
+        },
+        "Cisco-IOS-XE-aaa:tacacs": {
+          "source-interface": {
+            "GigabitEthernet": "0/0"
+          }
         },
         "Cisco-IOS-XE-http:http": {
           "server": true,
@@ -267,7 +272,7 @@
           },
           {
             "name": "1/0/1",
-            "description": "USER_PORT",
+            "description": "*** User Port / VLAN10 ***",
             "switchport-config": {
               "switchport": {
                 "Cisco-IOS-XE-switch:access": {
@@ -289,6 +294,23 @@
                     "aging": {
                       "time": 2,
                       "type": "inactivity"
+                    },
+                    "mac-address-sticky-on": {
+                      "mac-address": {
+                        "sticky": [
+                          null
+                        ]
+                      }
+                    },
+                    "mac-address-config": {
+                      "mac-address": {
+                        "hw-address-access": [
+                          {
+                            "hw-address": "0050.56bf.77ea",
+                            "sticky": "sticky"
+                          }
+                        ]
+                      }
                     },
                     "maximum-address-config": {
                       "maximum": {
@@ -341,6 +363,22 @@
                 }
               }
             },
+            "storm-control": {
+              "broadcast": {
+                "level": {
+                  "threshold": {
+                    "rising-threshold": "5.0"
+                  }
+                }
+              },
+              "multicast": {
+                "level": {
+                  "threshold": {
+                    "rising-threshold": "5.0"
+                  }
+                }
+              }
+            },
             "Cisco-IOS-XE-spanning-tree:spanning-tree": {
               "bpduguard": {
                 "enable": [
@@ -357,7 +395,7 @@
           },
           {
             "name": "1/0/2",
-            "description": "SERVER_PORT",
+            "description": "*** Server Port / VLAN20 ***",
             "switchport-config": {
               "switchport": {
                 "Cisco-IOS-XE-switch:access": {
@@ -380,14 +418,31 @@
                       "time": 2,
                       "type": "inactivity"
                     },
+                    "mac-address-sticky-on": {
+                      "mac-address": {
+                        "sticky": [
+                          null
+                        ]
+                      }
+                    },
+                    "mac-address-config": {
+                      "mac-address": {
+                        "hw-address-access": [
+                          {
+                            "hw-address": "0050.56bf.77ea",
+                            "sticky": "sticky"
+                          }
+                        ]
+                      }
+                    },
                     "maximum-address-config": {
                       "maximum": {
-                        "maximum": 2
+                        "maximum": 3
                       }
                     },
                     "maxcount": [
                       {
-                        "max-addresses": 2
+                        "max-addresses": 3
                       }
                     ],
                     "violation": {
@@ -428,6 +483,22 @@
                     "vlan-id": 999
                   },
                   "vlan": 999
+                }
+              }
+            },
+            "storm-control": {
+              "broadcast": {
+                "level": {
+                  "threshold": {
+                    "rising-threshold": "5.0"
+                  }
+                }
+              },
+              "multicast": {
+                "level": {
+                  "threshold": {
+                    "rising-threshold": "5.0"
+                  }
                 }
               }
             },
@@ -976,6 +1047,14 @@
             "shutdown": [
               null
             ]
+          }
+        ],
+        "Loopback": [
+          {
+            "name": 10
+          },
+          {
+            "name": 20
           }
         ],
         "Vlan": [
