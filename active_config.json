@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2025-11-06T20:54:28.200590Z",
+  "snapshot_time": "2025-11-07T00:55:57.256796Z",
   "device": "devnetsandboxiosxec9k.cisco.com",
   "config": {
     "Cisco-IOS-XE-native:native": {
@@ -119,11 +119,6 @@
           "window-size": 212000,
           "ack-tuning": {}
         },
-        "Cisco-IOS-XE-aaa:tacacs": {
-          "source-interface": {
-            "GigabitEthernet": "0/0"
-          }
-        },
         "Cisco-IOS-XE-http:http": {
           "server": true,
           "secure-server": true
@@ -133,11 +128,19 @@
         "Cisco-IOS-XE-vlan:vlan-list": [
           {
             "id": 10,
-            "name": "TEST_VLAN"
+            "name": "USERS-VLAN"
           },
           {
             "id": 20,
-            "name": "VLAN20"
+            "name": "SERVERS-VLAN"
+          },
+          {
+            "id": 100,
+            "name": "MGMT-VLAN"
+          },
+          {
+            "id": 999,
+            "name": "BLACKHOLE-NATIVE"
           }
         ]
       },
@@ -264,6 +267,7 @@
           },
           {
             "name": "1/0/1",
+            "description": "USER_PORT",
             "switchport-config": {
               "switchport": {
                 "Cisco-IOS-XE-switch:access": {
@@ -273,6 +277,49 @@
                 },
                 "Cisco-IOS-XE-switch:mode": {
                   "access": {}
+                },
+                "Cisco-IOS-XE-switch:nonegotiate": [
+                  null
+                ],
+                "Cisco-IOS-XE-switch:port-security-conf": [
+                  null
+                ],
+                "Cisco-IOS-XE-switch:port-security-config": {
+                  "port-security": {
+                    "aging": {
+                      "time": 2,
+                      "type": "inactivity"
+                    },
+                    "maximum-address-config": {
+                      "maximum": {
+                        "maximum": 2
+                      }
+                    },
+                    "maxcount": [
+                      {
+                        "max-addresses": 2
+                      }
+                    ],
+                    "violation": {
+                      "restrict": [
+                        null
+                      ]
+                    }
+                  }
+                },
+                "Cisco-IOS-XE-switch:trunk": {
+                  "allowed": {
+                    "vlan-v2": {
+                      "vlan-choices": {
+                        "vlans": "10,20,100"
+                      }
+                    }
+                  },
+                  "native": {
+                    "vlan": {
+                      "vlan-id": 999
+                    }
+                  }
                 }
               }
             },
@@ -281,11 +328,36 @@
                 "vlan": {
                   "vlan": 10
                 }
+              },
+              "Cisco-IOS-XE-switch:nonegotiate": [
+                null
+              ],
+              "Cisco-IOS-XE-switch:trunk": {
+                "native": {
+                  "vlan-config": {
+                    "vlan-id": 999
+                  },
+                  "vlan": 999
+                }
               }
+            },
+            "Cisco-IOS-XE-spanning-tree:spanning-tree": {
+              "bpduguard": {
+                "enable": [
+                  null
+                ]
+              },
+              "portfast-v2": {
+                "access": [
+                  null
+                ]
+              },
+              "portfast": {}
             }
           },
           {
             "name": "1/0/2",
+            "description": "SERVER_PORT",
             "switchport-config": {
               "switchport": {
                 "Cisco-IOS-XE-switch:access": {
@@ -295,36 +367,48 @@
                 },
                 "Cisco-IOS-XE-switch:mode": {
                   "access": {}
-                }
-              }
-            },
-            "switchport": {
-              "Cisco-IOS-XE-switch:access": {
-                "vlan": {
-                  "vlan": 20
-                }
-              }
-            }
-          },
-          {
-            "name": "1/0/3",
-            "shutdown": [
-              null
-            ]
-          },
-          {
-            "name": "1/0/4",
-            "shutdown": [
-              null
-            ]
-          },
-          {
-            "name": "1/0/5",
-            "switchport-config": {
-              "switchport": {
-                "Cisco-IOS-XE-switch:access": {
-                  "vlan": {
-                    "vlan": 20
+                },
+                "Cisco-IOS-XE-switch:nonegotiate": [
+                  null
+                ],
+                "Cisco-IOS-XE-switch:port-security-conf": [
+                  null
+                ],
+                "Cisco-IOS-XE-switch:port-security-config": {
+                  "port-security": {
+                    "aging": {
+                      "time": 2,
+                      "type": "inactivity"
+                    },
+                    "maximum-address-config": {
+                      "maximum": {
+                        "maximum": 2
+                      }
+                    },
+                    "maxcount": [
+                      {
+                        "max-addresses": 2
+                      }
+                    ],
+                    "violation": {
+                      "restrict": [
+                        null
+                      ]
+                    }
+                  }
+                },
+                "Cisco-IOS-XE-switch:trunk": {
+                  "allowed": {
+                    "vlan-v2": {
+                      "vlan-choices": {
+                        "vlans": "10,20,100"
+                      }
+                    }
+                  },
+                  "native": {
+                    "vlan": {
+                      "vlan-id": 999
+                    }
                   }
                 }
               }
@@ -334,56 +418,577 @@
                 "vlan": {
                   "vlan": 20
                 }
+              },
+              "Cisco-IOS-XE-switch:nonegotiate": [
+                null
+              ],
+              "Cisco-IOS-XE-switch:trunk": {
+                "native": {
+                  "vlan-config": {
+                    "vlan-id": 999
+                  },
+                  "vlan": 999
+                }
+              }
+            },
+            "Cisco-IOS-XE-spanning-tree:spanning-tree": {
+              "bpduguard": {
+                "enable": [
+                  null
+                ]
+              },
+              "portfast-v2": {
+                "access": [
+                  null
+                ]
+              },
+              "portfast": {}
+            }
+          },
+          {
+            "name": "1/0/3",
+            "description": "UNUSED b",
+            "switchport-config": {
+              "switchport": {
+                "Cisco-IOS-XE-switch:access": {
+                  "vlan": {
+                    "vlan": 999
+                  }
+                },
+                "Cisco-IOS-XE-switch:mode": {
+                  "access": {}
+                },
+                "Cisco-IOS-XE-switch:nonegotiate": [
+                  null
+                ],
+                "Cisco-IOS-XE-switch:port-security-conf": [
+                  null
+                ],
+                "Cisco-IOS-XE-switch:port-security-config": {
+                  "port-security": {
+                    "aging": {
+                      "time": 2,
+                      "type": "inactivity"
+                    },
+                    "maximum-address-config": {
+                      "maximum": {
+                        "maximum": 2
+                      }
+                    },
+                    "maxcount": [
+                      {
+                        "max-addresses": 2
+                      }
+                    ],
+                    "violation": {
+                      "restrict": [
+                        null
+                      ]
+                    }
+                  }
+                },
+                "Cisco-IOS-XE-switch:trunk": {
+                  "allowed": {
+                    "vlan-v2": {
+                      "vlan-choices": {
+                        "vlans": "10,20,100"
+                      }
+                    }
+                  },
+                  "native": {
+                    "vlan": {
+                      "vlan-id": 999
+                    }
+                  }
+                }
+              }
+            },
+            "switchport": {
+              "Cisco-IOS-XE-switch:access": {
+                "vlan": {
+                  "vlan": 999
+                }
+              },
+              "Cisco-IOS-XE-switch:nonegotiate": [
+                null
+              ],
+              "Cisco-IOS-XE-switch:trunk": {
+                "native": {
+                  "vlan-config": {
+                    "vlan-id": 999
+                  },
+                  "vlan": 999
+                }
               }
             },
             "shutdown": [
               null
-            ]
+            ],
+            "Cisco-IOS-XE-spanning-tree:spanning-tree": {
+              "bpduguard": {
+                "enable": [
+                  null
+                ]
+              },
+              "portfast-v2": {
+                "access": [
+                  null
+                ]
+              },
+              "portfast": {}
+            }
+          },
+          {
+            "name": "1/0/4",
+            "description": "UNUSED b",
+            "switchport-config": {
+              "switchport": {
+                "Cisco-IOS-XE-switch:access": {
+                  "vlan": {
+                    "vlan": 999
+                  }
+                },
+                "Cisco-IOS-XE-switch:mode": {
+                  "access": {}
+                },
+                "Cisco-IOS-XE-switch:nonegotiate": [
+                  null
+                ],
+                "Cisco-IOS-XE-switch:port-security-conf": [
+                  null
+                ],
+                "Cisco-IOS-XE-switch:port-security-config": {
+                  "port-security": {
+                    "aging": {
+                      "time": 2,
+                      "type": "inactivity"
+                    },
+                    "maximum-address-config": {
+                      "maximum": {
+                        "maximum": 2
+                      }
+                    },
+                    "maxcount": [
+                      {
+                        "max-addresses": 2
+                      }
+                    ],
+                    "violation": {
+                      "restrict": [
+                        null
+                      ]
+                    }
+                  }
+                },
+                "Cisco-IOS-XE-switch:trunk": {
+                  "allowed": {
+                    "vlan-v2": {
+                      "vlan-choices": {
+                        "vlans": "10,20,100"
+                      }
+                    }
+                  },
+                  "native": {
+                    "vlan": {
+                      "vlan-id": 999
+                    }
+                  }
+                }
+              }
+            },
+            "switchport": {
+              "Cisco-IOS-XE-switch:access": {
+                "vlan": {
+                  "vlan": 999
+                }
+              },
+              "Cisco-IOS-XE-switch:nonegotiate": [
+                null
+              ],
+              "Cisco-IOS-XE-switch:trunk": {
+                "native": {
+                  "vlan-config": {
+                    "vlan-id": 999
+                  },
+                  "vlan": 999
+                }
+              }
+            },
+            "shutdown": [
+              null
+            ],
+            "Cisco-IOS-XE-spanning-tree:spanning-tree": {
+              "bpduguard": {
+                "enable": [
+                  null
+                ]
+              },
+              "portfast-v2": {
+                "access": [
+                  null
+                ]
+              },
+              "portfast": {}
+            }
+          },
+          {
+            "name": "1/0/5",
+            "description": "UNUSED b",
+            "switchport-config": {
+              "switchport": {
+                "Cisco-IOS-XE-switch:access": {
+                  "vlan": {
+                    "vlan": 999
+                  }
+                },
+                "Cisco-IOS-XE-switch:mode": {
+                  "access": {}
+                },
+                "Cisco-IOS-XE-switch:nonegotiate": [
+                  null
+                ],
+                "Cisco-IOS-XE-switch:port-security-conf": [
+                  null
+                ],
+                "Cisco-IOS-XE-switch:port-security-config": {
+                  "port-security": {
+                    "aging": {
+                      "time": 2,
+                      "type": "inactivity"
+                    },
+                    "maximum-address-config": {
+                      "maximum": {
+                        "maximum": 2
+                      }
+                    },
+                    "maxcount": [
+                      {
+                        "max-addresses": 2
+                      }
+                    ],
+                    "violation": {
+                      "restrict": [
+                        null
+                      ]
+                    }
+                  }
+                },
+                "Cisco-IOS-XE-switch:trunk": {
+                  "allowed": {
+                    "vlan-v2": {
+                      "vlan-choices": {
+                        "vlans": "10,20,100"
+                      }
+                    }
+                  },
+                  "native": {
+                    "vlan": {
+                      "vlan-id": 999
+                    }
+                  }
+                }
+              }
+            },
+            "switchport": {
+              "Cisco-IOS-XE-switch:access": {
+                "vlan": {
+                  "vlan": 999
+                }
+              },
+              "Cisco-IOS-XE-switch:nonegotiate": [
+                null
+              ],
+              "Cisco-IOS-XE-switch:trunk": {
+                "native": {
+                  "vlan-config": {
+                    "vlan-id": 999
+                  },
+                  "vlan": 999
+                }
+              }
+            },
+            "shutdown": [
+              null
+            ],
+            "Cisco-IOS-XE-spanning-tree:spanning-tree": {
+              "bpduguard": {
+                "enable": [
+                  null
+                ]
+              },
+              "portfast-v2": {
+                "access": [
+                  null
+                ]
+              },
+              "portfast": {}
+            }
           },
           {
             "name": "1/0/6",
+            "description": "UNUSED b",
+            "switchport-config": {
+              "switchport": {
+                "Cisco-IOS-XE-switch:access": {
+                  "vlan": {
+                    "vlan": 999
+                  }
+                },
+                "Cisco-IOS-XE-switch:mode": {
+                  "access": {}
+                },
+                "Cisco-IOS-XE-switch:nonegotiate": [
+                  null
+                ],
+                "Cisco-IOS-XE-switch:port-security-conf": [
+                  null
+                ],
+                "Cisco-IOS-XE-switch:port-security-config": {
+                  "port-security": {
+                    "aging": {
+                      "time": 2,
+                      "type": "inactivity"
+                    },
+                    "maximum-address-config": {
+                      "maximum": {
+                        "maximum": 2
+                      }
+                    },
+                    "maxcount": [
+                      {
+                        "max-addresses": 2
+                      }
+                    ],
+                    "violation": {
+                      "restrict": [
+                        null
+                      ]
+                    }
+                  }
+                },
+                "Cisco-IOS-XE-switch:trunk": {
+                  "allowed": {
+                    "vlan-v2": {
+                      "vlan-choices": {
+                        "vlans": "10,20,100"
+                      }
+                    }
+                  },
+                  "native": {
+                    "vlan": {
+                      "vlan-id": 999
+                    }
+                  }
+                }
+              }
+            },
+            "switchport": {
+              "Cisco-IOS-XE-switch:access": {
+                "vlan": {
+                  "vlan": 999
+                }
+              },
+              "Cisco-IOS-XE-switch:nonegotiate": [
+                null
+              ],
+              "Cisco-IOS-XE-switch:trunk": {
+                "native": {
+                  "vlan-config": {
+                    "vlan-id": 999
+                  },
+                  "vlan": 999
+                }
+              }
+            },
             "shutdown": [
               null
-            ]
+            ],
+            "Cisco-IOS-XE-spanning-tree:spanning-tree": {
+              "bpduguard": {
+                "enable": [
+                  null
+                ]
+              },
+              "portfast-v2": {
+                "access": [
+                  null
+                ]
+              },
+              "portfast": {}
+            }
           },
           {
             "name": "1/0/7",
+            "description": "UNUSED b",
+            "switchport-config": {
+              "switchport": {
+                "Cisco-IOS-XE-switch:access": {
+                  "vlan": {
+                    "vlan": 999
+                  }
+                },
+                "Cisco-IOS-XE-switch:mode": {
+                  "access": {}
+                },
+                "Cisco-IOS-XE-switch:nonegotiate": [
+                  null
+                ],
+                "Cisco-IOS-XE-switch:port-security-conf": [
+                  null
+                ],
+                "Cisco-IOS-XE-switch:port-security-config": {
+                  "port-security": {
+                    "aging": {
+                      "time": 2,
+                      "type": "inactivity"
+                    },
+                    "maximum-address-config": {
+                      "maximum": {
+                        "maximum": 2
+                      }
+                    },
+                    "maxcount": [
+                      {
+                        "max-addresses": 2
+                      }
+                    ],
+                    "violation": {
+                      "restrict": [
+                        null
+                      ]
+                    }
+                  }
+                },
+                "Cisco-IOS-XE-switch:trunk": {
+                  "allowed": {
+                    "vlan-v2": {
+                      "vlan-choices": {
+                        "vlans": "10,20,100"
+                      }
+                    }
+                  },
+                  "native": {
+                    "vlan": {
+                      "vlan-id": 999
+                    }
+                  }
+                }
+              }
+            },
+            "switchport": {
+              "Cisco-IOS-XE-switch:access": {
+                "vlan": {
+                  "vlan": 999
+                }
+              },
+              "Cisco-IOS-XE-switch:nonegotiate": [
+                null
+              ],
+              "Cisco-IOS-XE-switch:trunk": {
+                "native": {
+                  "vlan-config": {
+                    "vlan-id": 999
+                  },
+                  "vlan": 999
+                }
+              }
+            },
             "shutdown": [
               null
             ]
           },
           {
             "name": "1/0/8",
+            "description": "UNUSED b",
             "switchport-config": {
               "switchport": {
                 "Cisco-IOS-XE-switch:access": {
                   "vlan": {
-                    "vlan": 20
+                    "vlan": 999
                   }
                 },
                 "Cisco-IOS-XE-switch:mode": {
                   "access": {}
+                },
+                "Cisco-IOS-XE-switch:nonegotiate": [
+                  null
+                ],
+                "Cisco-IOS-XE-switch:port-security-conf": [
+                  null
+                ],
+                "Cisco-IOS-XE-switch:port-security-config": {
+                  "port-security": {
+                    "aging": {
+                      "time": 2,
+                      "type": "inactivity"
+                    },
+                    "maximum-address-config": {
+                      "maximum": {
+                        "maximum": 2
+                      }
+                    },
+                    "maxcount": [
+                      {
+                        "max-addresses": 2
+                      }
+                    ],
+                    "violation": {
+                      "restrict": [
+                        null
+                      ]
+                    }
+                  }
+                },
+                "Cisco-IOS-XE-switch:trunk": {
+                  "allowed": {
+                    "vlan-v2": {
+                      "vlan-choices": {
+                        "vlans": "10,20,100"
+                      }
+                    }
+                  },
+                  "native": {
+                    "vlan": {
+                      "vlan-id": 999
+                    }
+                  }
                 }
               }
             },
             "switchport": {
               "Cisco-IOS-XE-switch:access": {
                 "vlan": {
-                  "vlan": 20
+                  "vlan": 999
+                }
+              },
+              "Cisco-IOS-XE-switch:nonegotiate": [
+                null
+              ],
+              "Cisco-IOS-XE-switch:trunk": {
+                "native": {
+                  "vlan-config": {
+                    "vlan-id": 999
+                  },
+                  "vlan": 999
                 }
               }
-            }
+            },
+            "shutdown": [
+              null
+            ]
           }
         ],
         "Vlan": [
           {
-            "name": 1
+            "name": 1,
+            "description": "*** Default VLAN Disabled for Security ***",
+            "shutdown": [
+              null
+            ]
           },
           {
             "name": 10,
-            "shutdown": [
-              null
-            ],
+            "description": "*** Users Gateway VLAN10 ***",
             "ip": {
               "address": {
                 "primary": {
@@ -395,6 +1000,7 @@
           },
           {
             "name": 20,
+            "description": "*** Servers Gateway VLAN20 ***",
             "ip": {
               "address": {
                 "primary": {
@@ -403,6 +1009,25 @@
                 }
               }
             }
+          },
+          {
+            "name": 100,
+            "description": "*** Management VLAN (Lab Only) ***",
+            "ip": {
+              "address": {
+                "primary": {
+                  "address": "10.100.0.1",
+                  "mask": "255.255.255.0"
+                }
+              }
+            }
+          },
+          {
+            "name": 999,
+            "description": "*** Blackhole VLAN / No Host Traffic ***",
+            "shutdown": [
+              null
+            ]
           }
         ]
       },
@@ -558,6 +1183,11 @@
             null
           ]
         },
+        "Cisco-IOS-XE-spanning-tree:portfast": {
+          "default": [
+            null
+          ]
+        },
         "Cisco-IOS-XE-spanning-tree:mode": "rapid-pvst"
       },
       "tacacs": {
@@ -677,6 +1307,20 @@
             }
           ]
         }
+      },
+      "Cisco-IOS-XE-arp:arp": {
+        "arp-entry": [
+          {
+            "ip": "192.168.10.10",
+            "hardware-address": "0000.0A0A.0001",
+            "arp-type": "ARPA"
+          },
+          {
+            "ip": "192.168.20.10",
+            "hardware-address": "0000.1414.0001",
+            "arp-type": "ARPA"
+          }
+        ]
       },
       "Cisco-IOS-XE-diagnostics:diagnostic": {
         "bootup": {
